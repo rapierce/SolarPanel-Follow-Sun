@@ -3,6 +3,9 @@ from datetime import datetime, timezone
 import astral
 from astral import Astral
 import time
+import pytz
+
+
 # import RPi.GPIO as GPIO
 
 # Global Variables
@@ -14,7 +17,8 @@ reset_Solar = True
 
 # Retrieves and returns current time
 def get_Current_Time():
-    curr_Time = datetime.now()
+    eastern = pytz.timezone('America/New_York')
+    curr_Time = datetime.now(eastern)
     return curr_Time
 
 def main_Function():
@@ -44,6 +48,7 @@ def solar_Adjust_Active(time_To_Adjust):
         current_Time = get_Current_Time()
         time_To_Adjust = time_To_Adjust - 1
         time.sleep(1)
+        print (current_Time)
         print (time_To_Adjust)
     daylight_Adjustment()
     
