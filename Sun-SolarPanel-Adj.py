@@ -45,7 +45,6 @@ def solar_Adjust_Active(time_To_Adjust):
         time_To_Adjust = time_To_Adjust - 1
         time.sleep(1)
         print (time_To_Adjust)
-        print (current_Time)
     daylight_Adjustment()
     
 def solar_Adjust_Deactive():
