@@ -3,6 +3,7 @@ from datetime import datetime, timezone
 import astral
 from astral import Astral
 import time
+# import RPi.GPIO as GPIO
 
 # Global Variables
 ast = Astral()
@@ -13,7 +14,7 @@ reset_Solar = True
 
 # Retrieves and returns current time
 def get_Current_Time():
-    curr_Time = datetime.now(timezone.utc)
+    curr_Time = datetime.now()
     return curr_Time
 
 def main_Function():
@@ -41,7 +42,7 @@ def solar_Adjust_Active(time_To_Adjust):
 
     while time_To_Adjust > 0:
         current_Time = get_Current_Time()
-        time_To_Adjust = time_To_Adjust - 100
+        time_To_Adjust = time_To_Adjust - 1
         time.sleep(1)
         print (time_To_Adjust)
         print (current_Time)
