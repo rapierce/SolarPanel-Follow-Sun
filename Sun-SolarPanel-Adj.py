@@ -35,7 +35,7 @@ def main_Function():
 
     time_To_Adjust = total_Seconds / 24
 
-    if current_Time > solar_Sunrise and current_Time < solar_Sunset:
+    if current_Time >= solar_Sunrise and current_Time < solar_Sunset:
         solar_Adjust_Active(time_To_Adjust)
     elif reset_Solar == True:
         reset_Solar_Panel()
