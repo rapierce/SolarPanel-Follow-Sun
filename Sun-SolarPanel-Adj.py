@@ -1,5 +1,5 @@
 from datetime import date
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 import astral
 from astral import Astral
 import time
@@ -61,9 +61,14 @@ def solar_Adjust_Deactive():
 
     time_Till_Sunrise = solar_Sunrise_Tomorrow - curr_Time
 
-    while time_Till_Sunrise > 0:
-        time_Till_Sunrise = time_Till_Sunrise - 1
+    sunrise_Total_Seconds = time_Till_Sunrise.seconds
+    calc_Sunrise_Hours, remainder = divmod(sunrise_Total_Seconds, 3600)
+    calc_Sunrise_Minutes, calc_Sunrise_Seconds = divmod(remainder, 60)
+
+    while sunrise_Total_Seconds > 0:
+        sunrise_Total_Seconds = sunrise_Total_Seconds - 1
         time.sleep(1)
+        print ('Seconds till Sunrise', sunrise_Total_Seconds)
     main_Function()
 
 def daylight_Adjustment():
