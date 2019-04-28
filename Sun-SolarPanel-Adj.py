@@ -23,8 +23,8 @@ def get_Current_Time():
 
 def main_Function():
     global local_City
-    sun_Position = local_City.sun(local=True)
     current_Time = get_Current_Time()
+    sun_Position = local_City.sun(local=True)
     solar_Sunrise = sun_Position.get('sunrise')
     solar_Noon = sun_Position.get('noon')
     solar_Sunset = sun_Position.get('sunset')
@@ -66,7 +66,7 @@ def solar_Adjust_Deactive():
     calc_Sunrise_Hours, remainder = divmod(sunrise_Total_Seconds, 3600)
     calc_Sunrise_Minutes, calc_Sunrise_Seconds = divmod(remainder, 60)
 
-    while sunrise_Total_Seconds > 0:
+    while sunrise_Total_Seconds > -1:
         sunrise_Total_Seconds = sunrise_Total_Seconds - 1
         time.sleep(1)
         print ('Seconds till Sunrise', sunrise_Total_Seconds)
