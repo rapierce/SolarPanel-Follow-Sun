@@ -12,7 +12,7 @@ import pytz
 ast = Astral()
 city_Name = 'Cleveland'
 local_City = ast[city_Name]
-sun_Position = local_City.sun(local=True)
+# sun_Position = local_City.sun(local=True)
 reset_Solar = True
 
 # Retrieves and returns current time
@@ -22,7 +22,8 @@ def get_Current_Time():
     return curr_Time
 
 def main_Function():
-    global sun_Position
+    global local_City
+    sun_Position = local_City.sun(local=True)
     current_Time = get_Current_Time()
     solar_Sunrise = sun_Position.get('sunrise')
     solar_Noon = sun_Position.get('noon')
