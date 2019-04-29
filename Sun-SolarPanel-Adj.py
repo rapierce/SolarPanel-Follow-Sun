@@ -23,8 +23,8 @@ def get_Current_Time():
 
 def main_Function():
     global local_City
-    current_Time = get_Current_Time()
     sun_Position = local_City.sun(local=True)
+    current_Time = get_Current_Time()
     solar_Sunrise = sun_Position.get('sunrise')
     solar_Noon = sun_Position.get('noon')
     solar_Sunset = sun_Position.get('sunset')
@@ -35,6 +35,9 @@ def main_Function():
     calc_Minutes, calc_Seconds = divmod(remainder, 60)
 
     time_To_Adjust = total_Seconds / 24
+
+    print (current_Time)
+    print (solar_Sunrise)
 
     if current_Time >= solar_Sunrise and current_Time < solar_Sunset:
         solar_Adjust_Active(time_To_Adjust)
@@ -66,10 +69,11 @@ def solar_Adjust_Deactive():
     calc_Sunrise_Hours, remainder = divmod(sunrise_Total_Seconds, 3600)
     calc_Sunrise_Minutes, calc_Sunrise_Seconds = divmod(remainder, 60)
 
-    while sunrise_Total_Seconds > -1:
+    while sunrise_Total_Seconds > 0:
         sunrise_Total_Seconds = sunrise_Total_Seconds - 1
         time.sleep(1)
-        print ('Seconds till Sunrise', sunrise_Total_Seconds)
+        # print ('Seconds till Sunrise', sunrise_Total_Seconds)
+    print (solar_Sunrise_Tomorrow)
     main_Function()
 
 def daylight_Adjustment():
