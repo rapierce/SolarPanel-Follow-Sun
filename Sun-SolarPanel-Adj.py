@@ -59,7 +59,7 @@ def solar_Adjust_Active(time_To_Adjust):
 def solar_Adjust_Deactive():
     global local_City
     curr_Time = get_Current_Time()
-    calc_Tomorrow = curr_Time + timedelta(days=1)
+    calc_Tomorrow = curr_Time.date() + timedelta(days=1)
     sun_Position_Tomorrow = local_City.sun(local=True, date = calc_Tomorrow)
     solar_Sunrise_Tomorrow = sun_Position_Tomorrow.get('sunrise')
 
@@ -92,7 +92,7 @@ def daylight_Adjustment():
     
     # Start Timer for duration actuator will be activated
     timer = 0
-    while timer <= 1:
+    while timer < 1:
         time.sleep(1)
         timer = timer + 1
         
