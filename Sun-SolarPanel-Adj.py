@@ -21,39 +21,14 @@ def get_Current_Time():
     curr_Time = datetime.now(eastern)
     return curr_Time
 
-def main_Function():
-    global local_City
-    sun_Position = local_City.sun(local=True)
-    current_Time = get_Current_Time()
-    solar_Sunrise = sun_Position.get('sunrise')
-    solar_Noon = sun_Position.get('noon')
-    solar_Sunset = sun_Position.get('sunset')
-    calc_Sunrise_Noon = solar_Noon - solar_Sunrise
-
-    total_Seconds = calc_Sunrise_Noon.seconds
-    calc_Hours, remainder = divmod(total_Seconds, 3600)
-    calc_Minutes, calc_Seconds = divmod(remainder, 60)
-
-    time_To_Adjust = total_Seconds / 24
-
-    print (current_Time)
-    print (solar_Sunrise)
-
-    if current_Time >= solar_Sunrise and current_Time < solar_Sunset:
-        solar_Adjust_Active(time_To_Adjust)
-    elif reset_Solar == True:
-        reset_Solar_Panel()
-    else:
-        solar_Adjust_Deactive()
-
 def solar_Adjust_Active(time_To_Adjust):
 
     while time_To_Adjust > 0:
         current_Time = get_Current_Time()
         time_To_Adjust = time_To_Adjust - 1
         time.sleep(1)
-        print (current_Time)
-        print (time_To_Adjust)
+        #print (current_Time)
+        #print (time_To_Adjust)
     daylight_Adjustment()
     
 def solar_Adjust_Deactive():
@@ -74,7 +49,7 @@ def solar_Adjust_Deactive():
         time.sleep(1)
         # print ('Seconds till Sunrise', sunrise_Total_Seconds)
     print (solar_Sunrise_Tomorrow)
-    main_Function()
+    return
 
 def daylight_Adjustment():
     global reset_Solar
@@ -104,7 +79,7 @@ def daylight_Adjustment():
     #GPIO.cleanup()
 
     reset_Solar = True
-    main_Function()
+    return
 
 def reset_Solar_Panel():
     global reset_Solar
@@ -134,6 +109,28 @@ def reset_Solar_Panel():
     # GPIO.cleanup()
 
     reset_Solar = False
-    main_Function()
+    return
 
-main_Function()
+while True:
+    sun_Position = local_City.sun(local=True)
+    current_Time = get_Current_Time()
+    solar_Sunrise = sun_Position.get('sunrise')
+    solar_Noon = sun_Position.get('noon')
+    solar_Sunset = sun_Position.get('sunset')
+    calc_Sunrise_Noon = solar_Noon - solar_Sunrise
+
+    total_Seconds = calc_Sunrise_Noon.seconds
+    calc_Hours, remainder = divmod(total_Seconds, 3600)
+    calc_Minutes, calc_Seconds = divmod(remainder, 60)
+
+    time_To_Adjust = total_Seconds / 24
+
+    print (current_Time)
+    print (solar_Sunrise)
+
+    if current_Time >= solar_Sunrise and current_Time < solar_Sunset:
+        solar_Adjust_Active(time_To_Adjust)
+    elif reset_Solar == True:
+        reset_Solar_Panel()
+    else:
+        solar_Adjust_Deactive()
